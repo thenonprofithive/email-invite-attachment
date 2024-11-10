@@ -15,10 +15,10 @@ export const generateICSFile = (eventData: ICSEvent): Promise<string> => {
 // Example hardcoded event for testing
 export const createSampleEvent = async () => {
   const event: ICSEvent = {
-    start: [2024, 11, 10, 4, 30],
+    start: [2024, 11, 10, 16, 30],
     duration: { hours: 0, minutes: 30 },
     title: 'Test Hive Chat - Title',
-    description: 'Test Hive Chat - Description',
+    description: 'Hive Room Link - https://thenonprofithive.daily.co/test-room',
     url: 'https://thenonprofithive.daily.co/test-room',
     busyStatus: 'BUSY',
     attendees: [
