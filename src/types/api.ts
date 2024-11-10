@@ -1,47 +1,26 @@
-export enum EmailEventType {
-  BOUNCES = 'bounces',
-  HARD_BOUNCES = 'hardBounces',
-  SOFT_BOUNCES = 'softBounces',
-  DELIVERED = 'delivered',
-  SPAM = 'spam',
-  REQUESTS = 'requests',
-  OPENED = 'opened',
-  CLICKS = 'clicks',
-  INVALID = 'invalid',
-  DEFERRED = 'deferred',
-  BLOCKED = 'blocked',
-  UNSUBSCRIBED = 'unsubscribed',
-  ERROR = 'error',
-  LOADED_BY_PROXY = 'loadedByProxy',
-}
-
 export interface EmailEvent {
-  id?: string;
-  email: string;
-  date: string;
-  subject: string;
-  messageId: string;
-  event: EmailEventType;
-  tag: string;
-  ip: string;
-  from: string;
-  templateId?: number;
+  id: string;
+  // Add other email event properties as needed
 }
 
-export interface FormData {
-  startDate: string;
-  endDate: string;
-  templateId?: string;
-  limit?: number;
-  offset?: number;
-  sort?: 'desc' | 'asc';
-  apiKey?: string;
-}
-
-export interface DashboardFormProps {
-  onDataFetch: (data: EmailEvent[]) => void;
-}
-
-export interface EmailEventsTableProps {
-  data: EmailEvent[];
+export interface ICSEvent {
+  start: number[];
+  duration: { hours: number; minutes: number };
+  title: string;
+  description: string;
+  location?: string;
+  url?: string;
+  geo?: { lat: number; lon: number };
+  categories?: string[];
+  status?: string;
+  busyStatus?: string;
+  organizer?: { name: string; email: string };
+  attendees?: {
+    name: string;
+    email: string;
+    rsvp?: boolean;
+    partstat?: string;
+    role?: string;
+    dir?: string;
+  }[];
 }
