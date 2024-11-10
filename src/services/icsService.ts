@@ -21,6 +21,7 @@ export const createSampleEvent = async () => {
     description: 'Hive Room Link - https://thenonprofithive.daily.co/test-room',
     url: 'https://thenonprofithive.daily.co/test-room',
     busyStatus: 'BUSY',
+    sequence: 2,
     attendees: [
       {
         name: 'Cole Van Vlack',
