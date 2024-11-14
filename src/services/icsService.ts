@@ -1,6 +1,15 @@
 import { createEvent } from 'ics';
 import { ICSEvent } from '../types/api';
 
+// First, let's fix the type issue by creating an interface that matches the ics package requirements
+interface CalendarEventParams {
+  start: [number, number, number, number, number]; // [year, month, day, hour, minute]
+  description: string;
+  url: string;
+  attendeeName: string;
+  attendeeEmail: string;
+}
+
 export const generateICSFile = (eventData: ICSEvent): Promise<string> => {
   return new Promise((resolve, reject) => {
     createEvent(eventData, (error: Error | undefined, value: string) => {
@@ -12,32 +21,30 @@ export const generateICSFile = (eventData: ICSEvent): Promise<string> => {
   });
 };
 
-// Example hardcoded event for testing
-export const createSampleEvent = async () => {
+export const createHiveChatPlaceHolderCalendarEvent = async ({
+  start,
+  description,
+  url,
+  attendeeName,
+  attendeeEmail,
+}: CalendarEventParams): Promise<string> => {
   const event: ICSEvent = {
-    start: [2024, 11, 10, 16, 30],
-    duration: { hours: 0, minutes: 30 },
-    title: 'Test Hive Chat - Title',
-    description: 'Hive Room Link - https://thenonprofithive.daily.co/test-room',
-    url: 'https://thenonprofithive.daily.co/test-room',
+    start,
+    duration: { hours: 0, minutes: 30 }, // Default 30-minute duration
+    title: 'Hive Chat',
+    description,
+    url,
     busyStatus: 'BUSY',
-    sequence: 2,
+    sequence: 0,
     attendees: [
       {
-        name: 'Cole Van Vlack',
-        email: 'cvanvlack@gmail.com',
+        name: attendeeName,
+        email: attendeeEmail,
         rsvp: true,
         partstat: 'ACCEPTED',
         role: 'REQ-PARTICIPANT',
       },
     ],
-    // alarms: [
-    //   {
-    //     action: 'display',
-    //     description: 'Reminder - Test Reminder',
-    //     trigger: [2024, 11, 10, 4, 0],
-    //   },
-    // ],
   };
 
   try {
